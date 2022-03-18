@@ -86,3 +86,13 @@ form button {
   cursor: pointer;
   outline: none;
 }
+
+
+.fall {
+  transform: translateY(10rem) rotateZ(20deg);
+  opacity: 0; }
+
+
+  .post{
+    
+  }

@@ -17,7 +17,7 @@ function Note({note,onDelete}) {
       <ButtonGroup aria-label="Basic example">
   <Button variant="danger" onClick={handleClick}>Delete</Button>
   <Button variant="warning">Edit</Button>
-  <Link to={"/posts/"+note.id}> <Button  variant="info">Read More</Button></Link> 
+  <Link to={"//posts"+note.id}> <Button  variant="info">Read More</Button></Link> 
 </ButtonGroup>
       
     </div>
