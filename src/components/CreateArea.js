@@ -1,82 +1,152 @@
-import React, { useState} from "react";
-
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-
-
-
+import React, { useState } from "react";
+import { initialState, validationSchema } from "../lib/helper";
+import { useFormik } from "formik";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import { Nav, Navbar } from "react-bootstrap";
 function CreateArea(props) {
-  const [note, setNote] = useState({
-    title: "",
-      author: "",
-    content: "",
-  });
+
+  const [open, setOpen] = useState(false);
   
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const formik = useFormik({
-    initialValues: {
-      title: '',
-      author: '',
-      content: '',
-    },
+    initialValues: initialState,
 
+    validationSchema: validationSchema,
 
-    validationSchema: Yup.object({
-      title: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Required'),
-      author: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Required'),
-      content: Yup.string().max(240).required('Required'),
-    }),
-      
-    
-    
-    onSubmit: values => {
-      console.log(values);
-      const id = Date.now()
-      const note = { ...values, id }
-      props.setNotes([...props.notes, note])
+    onSubmit: (values) => {
+      const id = Date.now();
+      const note = { ...values, id };
+      setOpen(false)
+        props.setNotes([...props.notes, note]);
+        console.log(values);
     },
   });
 
   return (
     <div>
-      
-      <form onSubmit={formik.handleSubmit}>
-        <input
-          name="title"
-          onChange={formik.handleChange}
-          value={formik.values.title}
-          placeholder="Title"
-          onBlur={formik.handleBlur}
-              />
+      <Nav.Link  onClick={handleClickOpen}>
+        Add A New Post
+      </Nav.Link>
+      <Dialog open={open} onClose={handleClose} >
+        <DialogContent >
+          <TextField
+            onChange={formik.handleChange}
+            value={formik.values.title}
+            name="title"
+            autoFocus
+            margin="dense"
+            id="title"
+            label="title"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            onChange={formik.handleChange}
+            value={formik.values.author}
+            autoFocus
+            name="author"
+            margin="dense"
+            id="author"
+            label="author"
+            type="text"
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            onChange={formik.handleChange}
+            value={formik.values.content}
+            name="content"
+            id="standard-multiline-flexible"
+            label="content"
+            multiline
+            maxRows={4}
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
 
-{formik.touched.title && formik.errors.title && <div>{formik.errors.title}</div>}
-               <input
-          name="author"
-          onChange={formik.handleChange}
-          value={formik.values.author}
-          placeholder="Author"
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.author && formik.errors.author && <div>{formik.errors.author}</div>}
-        <textarea
-          name="content"
-          onChange={formik.handleChange}
-          value={formik.values.content}
-          placeholder="Write a post..."
-          rows="3"
-          onBlur={formik.handleBlur}
-        />
-        {formik.touched.content && formik.errors.content && <div>{formik.errors.content}</div>}
-        <button type="submit">Add</button>
-      </form>
-
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button type="submit"  onClick={formik.handleSubmit}>
+            Publish
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
+
+
+
+
+
+
+
+//   const formik = useFormik({
+//     initialValues: initialState,
+
+//     validationSchema: validationSchema,
+
+//     onSubmit: (values) => {
+//       console.log(values);
+//       const id = Date.now();
+//       const note = { ...values, id };
+//       props.setNotes([...props.notes, note]);
+//     },
+//   });
+
+//   return (
+//     <div>
+//       <form onSubmit={formik.handleSubmit}>
+//         <input
+//           name="title"
+//           onChange={formik.handleChange}
+//           value={formik.values.title}
+//           placeholder="Title"
+//           onBlur={formik.handleBlur}
+//         />
+
+//         {formik.touched.title && formik.errors.title && (
+//           <div>{formik.errors.title}</div>
+//         )}
+//         <input
+//           name="author"
+//           onChange={formik.handleChange}
+//           value={formik.values.author}
+//           placeholder="Author"
+//           onBlur={formik.handleBlur}
+//         />
+//         {formik.touched.author && formik.errors.author && (
+//           <div>{formik.errors.author}</div>
+//         )}
+//         <textarea
+//           name="content"
+//           onChange={formik.handleChange}
+//           value={formik.values.content}
+//           placeholder="Write a post..."
+//           rows="3"
+//           onBlur={formik.handleBlur}
+//         />
+//         {formik.touched.content && formik.errors.content && (
+//           <div>{formik.errors.content}</div>
+//         )}
+//         <button type="submit">Add</button>
+//       </form>
+//     </div>
+//   );
+// }
 
 export default CreateArea;

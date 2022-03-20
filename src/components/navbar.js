@@ -1,8 +1,10 @@
 import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { useEffect, useState } from "react";
+import CreateArea from "./CreateArea";
 
-function NavBar() {
+function NavBar({ notes, setNotes, addNote }) {
+  
   return (
     <header>
       <Navbar collapseOnSelect expand="lg">
@@ -13,7 +15,7 @@ function NavBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/AddPost">Add Post</Nav.Link>
+            <CreateArea notes={notes} setNotes={setNotes} onAdd={addNote} />
           </Nav>
           <Nav>
             <Nav.Link href="/PostsBase">View Posts</Nav.Link>

@@ -26,7 +26,7 @@ header h1 {
 
 
 .note {
-  background: #fff;
+  background-color: #81ecec;
   border-radius: 7px;
   box-shadow: 0 2px 5px #ccc;
   padding: 10px;
@@ -95,4 +95,15 @@ form button {
 
   .post{
     
+  }
+
+  .card {
+    border-radius: 25px;
+    position: relative;
+    padding: 25px 15px;
+    background-color: #81ecec;
+    margin: 50px 0;
+    height: 200px;
+    box-shadow: 0 2px 5px #ccc;
+    text-align: left;
   }
