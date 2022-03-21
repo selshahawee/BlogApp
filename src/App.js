@@ -1,11 +1,12 @@
 import React from "react";
-import NavBar from "./components/navbar";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ReadMore from "./components/ReadMore";
 import HomePage from "./components/HomePage";
 import PostsBase from "./components/PostsBase";
 import { useState, useEffect } from "react";
+import RappBar from './components/RappBar'
 
 function App() {
   const [notes, setNotes] = useState(() => {
@@ -34,12 +35,10 @@ function App() {
   }
   return (
     <Router>
-      <NavBar
-        notes={notes}
+      
+  <RappBar notes={notes}
         setNotes={setNotes}
-        onAdd={addNote}
-      />
-
+        onAdd={addNote}/>
       <Routes>
         <Route
           path="/"

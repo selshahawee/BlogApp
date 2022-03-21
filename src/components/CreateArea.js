@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import { Nav, Navbar } from "react-bootstrap";
+import Link from "@mui/material/Link";
 function CreateArea(props) {
 
   const [open, setOpen] = useState(false);
@@ -36,9 +36,9 @@ function CreateArea(props) {
 
   return (
     <div>
-      <Nav.Link  onClick={handleClickOpen}>
+      <Link color="inherit" style={{ textDecoration: "none" }}  onClick={handleClickOpen}>
         Add A New Post
-      </Nav.Link>
+      </Link>
       <Dialog open={open} onClose={handleClose} >
         <DialogContent >
           <TextField
